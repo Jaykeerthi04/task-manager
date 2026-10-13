@@ -6,7 +6,7 @@ A task management app for gig workers, built with React Native (Expo), TypeScrip
 
 | Login | Task list | Filtered | Add task |
 |---|---|---|---|
-| <img src="screenshots/login.png" width="200"> | <img src="screenshots/tasks.png" width="200"> | <img src="screenshots/filtered.png" width="200"> | <img src="screenshots/form.png" width="200"> |
+| <img src="screenshots/login.jpeg" width="200"> | <img src="screenshots/tasks.jpeg" width="200"> | <img src="screenshots/filtered.jpeg" width="200"> | <img src="screenshots/form.jpeg" width="200"> |
 
 ## Features
 
