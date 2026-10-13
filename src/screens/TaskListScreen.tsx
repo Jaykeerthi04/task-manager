@@ -8,7 +8,7 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterBar } from '../components/FilterBar';
 import { TaskItem } from '../components/TaskItem';
 import { ScreenProps } from '../navigation/types';
@@ -20,6 +20,7 @@ import { filterAndSortTasks } from '../utils/taskUtils';
 
 export default function TaskListScreen({ navigation }: ScreenProps<'Tasks'>) {
   const theme = useTheme();
+  const insets = useSafeAreaInsets();
   const signOut = useAuthStore((s) => s.signOut);
 
   const tasks = useTaskStore((s) => s.tasks);
@@ -88,7 +89,9 @@ export default function TaskListScreen({ navigation }: ScreenProps<'Tasks'>) {
               onDelete={(t) => deleteTask(t.id)}
             />
           )}
-          contentContainerStyle={visibleTasks.length === 0 ? styles.emptyContainer : styles.list}
+          contentContainerStyle={
+            visibleTasks.length === 0 ? styles.emptyContainer : { paddingBottom: 100 + insets.bottom }
+          }
           ListEmptyComponent={
             <View style={styles.center}>
               <Text variant="titleMedium">
@@ -104,7 +107,7 @@ export default function TaskListScreen({ navigation }: ScreenProps<'Tasks'>) {
 
       <FAB
         icon="plus"
-        style={[styles.fab, { backgroundColor: theme.colors.primary }]}
+        style={[styles.fab, { backgroundColor: theme.colors.primary, bottom: insets.bottom + 24 }]}
         color="#FFFFFF"
         onPress={() => navigation.navigate('TaskForm')}
         accessibilityLabel="Add task"
@@ -132,8 +135,7 @@ const styles = StyleSheet.create({
   },
   headerSub: { color: '#E4E2FF' },
   headerTitle: { color: '#FFFFFF', fontWeight: '700' },
-  list: { paddingBottom: 100 },
   emptyContainer: { flexGrow: 1 },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 6, padding: 24 },
-  fab: { position: 'absolute', right: 20, bottom: 28, borderRadius: 28 },
+  fab: { position: 'absolute', right: 20, borderRadius: 28 },
 });
